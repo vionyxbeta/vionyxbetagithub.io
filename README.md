@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vionyx - AI Virtual Assistant</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #4a00e0, #8e2de2, #00c6ff);
+    background-size: 300% 300%;
+    animation: gradientMove 15s ease infinite;
+    color: white;
+    text-align: center;
+  }
+  @keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  header { padding: 30px 20px; }
+  header h1 { font-size: 3rem; margin: 0; letter-spacing: 2px; }
+  section { padding: 40px 20px; max-width: 1200px; margin: auto; }
+  .plans { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 30px; }
+  .plan { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(8px); border-radius: 15px; padding: 20px; width: 300px; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; }
+  .plan:hover { transform: scale(1.05); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+  .plan h3 { font-size: 1.5rem; margin-bottom: 15px; }
+  .price { font-size: 1.2rem; margin: 10px 0; font-weight: bold; }
+  .plan p { font-size: 1rem; line-height: 1.4; flex-grow: 1; }
+  .buy-btn { margin-top: 15px; padding: 10px 15px; background-color: #00ff99; color: #000; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; transition: background 0.3s ease; text-decoration: none; display: inline-block; }
+  .buy-btn:hover { background-color: #00cc7a; }
+  table { width: 100%; border-collapse: collapse; margin-top: 40px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(8px); border-radius: 10px; overflow: hidden; }
+  th, td { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.2); text-align: center; }
+  th { background-color: rgba(255, 255, 255, 0.15); font-size: 1.1rem; }
+  td { font-size: 1rem; }
+  .tick { color: #00ff99; font-weight: bold; font-size: 1.3rem; }
+  .cross { color: #ff4d4d; font-weight: bold; font-size: 1.3rem; }
+  #asistenteIcon { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; border-radius: 50%; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.2); z-index: 1000; background-size: cover; background-position: center; background-image: url('VIVI.png'); }
+  #chatWindow { position: fixed; bottom: 90px; right: 20px; width: 320px; max-height: 420px; background: white; border-radius: 10px; box-shadow: 0 8px 20px rgba(0,0,0,0.3); display: none; flex-direction: column; overflow: hidden; z-index: 1001; color: black; }
+  #chatHeader { background-color: #6a0dad; color: white; padding: 15px; font-weight: bold; text-align: center; }
+  #chatMessages { flex-grow: 1; padding: 15px; overflow-y: auto; background: #f9f9f9; }
+  .message { margin-bottom: 15px; max-width: 80%; padding: 10px 15px; border-radius: 20px; clear: both; }
+  .botMessage { background-color: #e2e2e2; color: #333; float: left; }
+  .userMessage { background-color: #6a0dad; color: white; float: right; text-align: right; }
+  #chatInputContainer { display: flex; border-top: 1px solid #ddd; }
+  #chatInput { flex: 1; border: none; padding: 10px; font-size: 14px; }
+  #sendBtn { background-color: #6a0dad; color: white; border: none; padding: 10px 15px; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Vionyx</h1>
+  <p>AI Virtual Assistants to boost your business</p>
+</header>
+
+<section>
+  <h2>What We Offer</h2>
+  <p>Vionyx provides AI-powered virtual assistants that handle customer service, bookings, automation, and more — tailored to your needs.</p>
+</section>
+
+<section>
+  <h2>Our Plans</h2>
+  <div class="plans">
+    <div class="plan">
+      <h3>Basic Plan</h3>
+      <div class="price">$10/month or $300 lifetime</div>
+      <p>Simple predefined responses, chat support during business hours, and basic customization.</p>
+      <a href="#" class="buy-btn">Buy Monthly</a>
+      <a href="#" class="buy-btn">Buy Lifetime</a>
+    </div>
+    <div class="plan">
+      <h3>Pro Plan</h3>
+      <div class="price">$30/month or $700 lifetime</div>
+      <p>Includes all Basic features plus AI-powered dynamic answers, integration with up to 3 websites, CRM connection, and advanced customization.</p>
+      <a href="#" class="buy-btn">Buy Monthly</a>
+      <a href="#" class="buy-btn">Buy Lifetime</a>
+    </div>
+    <div class="plan">
+      <h3>Premium Plan</h3>
+      <div class="price">$70/month or $900 lifetime</div>
+      <p>Includes all Pro features plus voice interaction, unlimited integrations, advanced automations, analytics reports, and 24/7 support.</p>
+      <a href="#" class="buy-btn">Buy Monthly</a>
+      <a href="#" class="buy-btn">Buy Lifetime</a>
+    </div>
+  </div>
+
+  <h2>Plan Comparison</h2>
+  <table>
+    <tr>
+      <th>Feature</th>
+      <th>Basic</th>
+      <th>Pro</th>
+      <th>Premium</th>
+    </tr>
+    <tr>
+      <td>Predefined responses</td>
+      <td class="tick">✔</td>
+      <td class="tick">✔</td>
+      <td class="tick">✔</td>
+    </tr>
+    <tr>
+      <td>AI dynamic answers</td>
+      <td class="cross">✘</td>
+      <td class="tick">✔</td>
+      <td class="tick">✔</td>
+    </tr>
+  </table>
+</section>
+
+<div id="asistenteIcon"></div>
+
+<div id="chatWindow">
+  <div id="chatHeader">Vivi - Virtual Assistant</div>
+  <div id="chatMessages"></div>
+  <div id="chatInputContainer">
+    <input type="text" id="chatInput" placeholder="Type your question...">
+    <button id="sendBtn">Send</button>
+  </div>
+</div>
+
+<script>
+const asistenteIcon = document.getElementById('asistenteIcon');
+const chatWindow = document.getElementById('chatWindow');
+const chatMessages = document.getElementById('chatMessages');
+const chatInput = document.getElementById('chatInput');
+const sendBtn = document.getElementById('sendBtn');
+
+asistenteIcon.addEventListener('click', () => {
+  chatWindow.style.display = (chatWindow.style.display === 'flex') ? 'none' : 'flex';
+  if (chatMessages.innerHTML.trim() === '') {
+    agregarMensaje("Hello! I'm Vivi, your AI assistant. How can I help you today?", 'botMessage');
+  }
+});
+
+function agregarMensaje(texto, clase) {
+  const msg = document.createElement('div');
+  msg.className = 'message ' + clase;
+  msg.textContent = texto;
+  chatMessages.appendChild(msg);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+async function enviarPregunta(pregunta) {
+  agregarMensaje(pregunta, 'userMessage');
+  chatInput.value = '';
+
+  try {
+    const response = await fetch('http://localhost:3000/mensaje', {
+      method: 'GET'
+    });
+    const data = await response.text();
+    agregarMensaje(data, 'botMessage');
+  } catch (error) {
+    agregarMensaje('Error: Unable to reach the server', 'botMessage');
+  }
+}
+
+sendBtn.addEventListener('click', () => {
+  const pregunta = chatInput.value.trim();
+  if (pregunta !== '') {
+    enviarPregunta(pregunta);
+  }
+});
+
+chatInput.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    sendBtn.click();
+  }
+});
+</script>
+
+</body>
+</html>
